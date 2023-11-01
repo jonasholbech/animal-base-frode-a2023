@@ -35,6 +35,8 @@ export function getData() {
       age: animal.age,
     };
   });
-
+  //Ordntli sinds ninjakode
+  //Prøv den her i console for at regne ud hvad new Set gør:
+  //new Set([1,3,2,1,2,3,2,1,2,3,2,1,1])
   return [animals, [...new Set(animals.map((a) => a.species))]];
 }

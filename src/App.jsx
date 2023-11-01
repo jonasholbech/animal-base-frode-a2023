@@ -11,7 +11,16 @@ function App() {
   if (filterProperty) {
     filtered = animals.filter((ani) => ani.species === filterProperty);
   }
-
+  function setSortAndFilter(property) {
+    //Hvis vi allerede sorterer efter "property" så skal den bare "flippes"
+    if (sortColumn === property) {
+      setSortDirection((old) => (old === "asc" ? "desc" : "asc"));
+    } else {
+      //Hvis det er en ny property, så sæt sort til ASC og skift sortColumn
+      setSortDirection("asc");
+      setSortColumn(property);
+    }
+  }
   function sortAnimals(a, b) {
     if (a[sortColumn] > b[sortColumn]) {
       return 1;
@@ -23,6 +32,7 @@ function App() {
   if (sortDirection === "desc") {
     filtered.reverse();
   }
+
   return (
     <div>
       {species.map((s) => (
@@ -33,16 +43,16 @@ function App() {
         <thead>
           <tr>
             <th>
-              <button onClick={() => setSortColumn("name")}>Name</button>
+              <button onClick={() => setSortAndFilter("name")}>Name</button>
             </th>
             <th>
-              <button onClick={() => setSortColumn("trait")}>Trait</button>
+              <button onClick={() => setSortAndFilter("trait")}>Trait</button>
             </th>
             <th>
-              <button onClick={() => setSortColumn("species")}>Spec</button>
+              <button onClick={() => setSortAndFilter("species")}>Spec</button>
             </th>
             <th>
-              <button onClick={() => setSortColumn("age")}>Age</button>
+              <button onClick={() => setSortAndFilter("age")}>Age</button>
             </th>
           </tr>
         </thead>
